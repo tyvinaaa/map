@@ -1,48 +1,115 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-	<style type="text/css">
-		body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
-		#allmap{width:100%;height:500px;}
-		p{margin-left:5px; font-size:14px;}
-	</style>
-	<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=YZ192cLsYXjqBPFGlHwZvHWscQCIlfC3&s=1"></script>
-	<title>个性化地图设置页</title>
-</head>
-<body>
-	<div id="allmap"></div>
-	<p>底图样式可通过<a href='http://developer.baidu.com/map/custom/' target="_blank">个性化在线编辑器</a>编辑获取</p>
-</body>
+  <head>
+    <title>Styled Maps - Night Mode</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        // Styles a map in night mode.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.674, lng: -73.945},
+          zoom: 12,
+          styles: [
+            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+            {
+              featureType: 'administrative.locality',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'geometry',
+              stylers: [{color: '#263c3f'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#6b9a76'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [{color: '#38414e'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#212a37'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#9ca5b3'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry',
+              stylers: [{color: '#746855'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#1f2835'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#f3d19c'}]
+            },
+            {
+              featureType: 'transit',
+              elementType: 'geometry',
+              stylers: [{color: '#2f3948'}]
+            },
+            {
+              featureType: 'transit.station',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{color: '#17263c'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#515c6d'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.stroke',
+              stylers: [{color: '#17263c'}]
+            }
+          ]
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places,panoramio,weather&sensor=false"
+    async defer></script>
+  </body>
 </html>
-<script type="text/javascript">
-	var map = new BMap.Map('allmap');
-	map.centerAndZoom(new BMap.Point(116.404269,39.916042), 12);
-	  
-	map.addControl(new BMap.NavigationControl());        // 添加平移缩放控件
-	map.addControl(new BMap.ScaleControl());             // 添加比例尺控件
-	map.addControl(new BMap.OverviewMapControl());       //添加缩略地图控件
-	map.enableScrollWheelZoom();                         //启用滚轮放大缩小
-	map.disable3DBuilding();
-
-	//个性化在线编辑器地址：http://developer.baidu.com/map/custom/
-	  var styleJson = [
-		 {
-		   "featureType": "all",
-		   "elementType": "geometry",
-		   "stylers": {
-					 "hue": "#007fff",
-					 "saturation": 89
-		   }
-		 },
-		 {
-		   "featureType": "water",
-		   "elementType": "all",
-		   "stylers": {
-					 "color": "#ffffff"
-		   }
-		 }
-	 ]
-	map.setMapStyle({styleJson:styleJson});
-</script>
